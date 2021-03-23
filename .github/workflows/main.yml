@@ -15,7 +15,7 @@ jobs:
     - run: flutter build web --dart-define AWS_REGION=${{ secrets.AWS_REGION }} --dart-define IMAGE_URL=${{ secrets.IMAGE_URL }}
     # setup gcloud
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-        with:
+      with:
           service_account_key: ${{ secrets.GCR_DEVOPS_SERVICE_ACCOUNT_KEY }}
           project_id: ${{ secrets.PROJECT_ID }}
           export_default_credentials: true

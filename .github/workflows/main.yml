@@ -11,7 +11,7 @@ jobs:
       with:
         flutter-version: '2.0.3'
     - run: flutter pub get
-    - run: flutter test
+    #- run: flutter test
     - run: flutter build web --dart-define AWS_REGION=${{ secrets.AWS_REGION }} --dart-define IMAGE_URL=${{ secrets.IMAGE_URL }}
     # setup gcloud
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master

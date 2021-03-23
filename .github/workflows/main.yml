@@ -1,0 +1,26 @@
+on: push
+name: build website
+jobs:
+  build:
+    name: Build website
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '2.0.3'
+    - run: flutter pub get
+    - run: flutter test
+    - run: flutter build web --dart-define AWS_REGION=${{ secrets.AWS_REGION }} --dart-define IMAGE_URL=${{ secrets.IMAGE_URL }}
+    # setup gcloud
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          service_account_key: ${{ secrets.GCR_DEVOPS_SERVICE_ACCOUNT_KEY }}
+          project_id: ${{ secrets.PROJECT_ID }}
+          export_default_credentials: true
+    
+    # Build docker image
+    - name: Image
+      run: |-
+          docker build --build-arg -t eu.gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA .

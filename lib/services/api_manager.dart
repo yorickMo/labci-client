@@ -4,6 +4,8 @@ import 'package:ci_apiclient/models/serverlist.dart';
 import 'package:http/http.dart' as http;
 
 class API_Manager {
+  static const String region = String.fromEnvironment("AWS_REGION");
+
   Future<List<ServerList>> getServers() async {
     var serverModel = null;
 
@@ -11,7 +13,7 @@ class API_Manager {
       print("start reading");
       var response = await http.get(Uri.parse(
           "https://cloudrun-api-gssmt3brqq-ew.a.run.app/get_instances?region=" +
-              String.fromEnvironment("AWS_REGION")));
+              region));
       if (response.statusCode == 200) {
         var jsonString = response.body;
 

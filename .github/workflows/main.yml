@@ -22,10 +22,10 @@ jobs:
     
     # Build docker image
     - name: Build docker image
-      run:  docker build -t eu.gcr.io/$PROJECT_ID/flutterapp:$GITHUB_SHA .
+      run:  docker build -t eu.gcr.io/${{ secrets.PROJECT_ID }}/flutterapp:$GITHUB_SHA .
     # Configure docker to use the gcloud command-line tool as a credential helper
     - run: gcloud auth configure-docker -q
 
     # Push image to Google Container Registry
     - name: Push docker image to GCR
-      run: docker push eu.gcr.io/$PROJECT_ID/flutterapp:$GITHUB_SHA
+      run: docker push eu.gcr.io/${{ secrets.PROJECT_ID }}/flutterapp:$GITHUB_SHA

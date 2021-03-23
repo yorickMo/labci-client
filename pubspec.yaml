@@ -1,4 +1,4 @@
-name: LabCI-client
+name: LabCI_client
 description: A demo application for LabCI @ Odisee UC
 
 # The following line prevents the package from being accidentally published to

@@ -12,20 +12,20 @@ jobs:
         flutter-version: '2.0.3'
     - run: flutter pub get
     #- run: flutter test
-    - run: flutter build web --dart-define AWS_REGION=${{ secrets.eu-west-2 }} --dart-define IMAGE_URL=${{ secrets.https://i.pinimg.com/originals/92/8a/5f/928a5f40dc4a5d5f688971aabd56dd6c.jpg }}
+    - run: flutter build web --dart-define AWS_REGION=${{secrets.AWS_REGION }} --dart-define IMAGE_URL=${{ secrets.IMAGE_URL }}
     # setup gcloud
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
-          service_account_key: ${{ secrets._2021-CI-Yorick-Mommens-c352c730c186.json }}
-          project_id: ${{  secrets.neat-talon-308808 }}
+          service_account_key: ${{ secrets.GCR_DEVOPS_SERVICE_ACCOUNT_KEY }}
+          project_id: ${{  secrets.PROJECT_ID }}
           export_default_credentials: true
     
     # Build docker image
     - name: Build docker image
-      run:  docker build -t eu.gcr.io/${{  secrets.neat-talon-308808 }}/flutterapp:$GITHUB_SHA .
+      run:  docker build -t eu.gcr.io/${{  secrets.PROJECT_ID }}/flutterapp:$GITHUB_SHA .
     # Configure docker to use the gcloud command-line tool as a credential helper
     - run: gcloud auth configure-docker -q
 
     # Push image to Google Container Registry
     - name: Push docker image to GCR
-      run: docker push eu.gcr.io/${{  secrets.neat-talon-308808 }}/flutterapp:$GITHUB_SHA
+      run: docker push eu.gcr.io/${{  secrets.PROJECT_ID }}/flutterapp:$GITHUB_SHA

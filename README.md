@@ -27,3 +27,4 @@ also, make sure secret variables are configured in your repository:
 - PROJECT_ID: gcp project ID. Warning: this is not the same as the project name...
 
 blabla
+bfg

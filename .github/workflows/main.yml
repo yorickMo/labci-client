@@ -12,11 +12,11 @@ jobs:
         flutter-version: '2.0.3'
     - run: flutter pub get
     #- run: flutter test
-    - run: flutter build web --dart-define AWS_REGION=${{ secrets.eu-west-3 }} --dart-define IMAGE_URL=${{ secrets.https://i.pinimg.com/originals/92/8a/5f/928a5f40dc4a5d5f688971aabd56dd6c.jpg }}
+    - run: flutter build web --dart-define AWS_REGION=${{ secrets.eu-west-2 }} --dart-define IMAGE_URL=${{ secrets.https://i.pinimg.com/originals/92/8a/5f/928a5f40dc4a5d5f688971aabd56dd6c.jpg }}
     # setup gcloud
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
-          service_account_key: ${{ secrets.GCR_DEVOPS_SERVICE_ACCOUNT_KEY }}
+          service_account_key: ${{ secrets._2021-CI-Yorick-Mommens-c352c730c186.json }}
           project_id: ${{  secrets.neat-talon-308808 }}
           export_default_credentials: true
     
